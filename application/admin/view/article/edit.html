@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+{include file="public/head" /}
+<body>
+	<!-- 头部 -->
+	{include file="public/top" /}
+	<!-- /头部 -->
+	
+	<div class="main-container container-fluid">
+		<div class="page-container">
+			            <!-- Page Sidebar -->
+          {include file="public/menu" /}
+            <!-- /Page Sidebar -->
+            <!-- Page Content -->
+            <div class="page-content">
+                <!-- Page Breadcrumb -->
+                <div class="page-breadcrumbs">
+                    <ul class="breadcrumb">
+                                        <li>
+                        <a href="{:url('index/index')}">系统</a>
+                    </li>
+                                        <li>
+                        <a href="{:url('lst')}">文章列表</a>
+                    </li>
+                                        <li class="active">编辑文章</li>
+                                        </ul>
+                </div>
+                <!-- /Page Breadcrumb -->
+
+                <!-- Page Body -->
+                <div class="page-body">
+                    
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">编辑文章</span>
+            </div>
+            <div class="widget-body">
+                <div id="horizontal-form">
+                    <form class="form-horizontal" role="form" action="" method="post" id="edit_form">
+                        <div class="form-group">
+                            <label for="cateid" class="col-sm-2 control-label no-padding-right">所属栏目</label>
+                            <div class="col-sm-6">
+                                <select name="cateid" style="width: 100%;">
+                                    {volist name="menu" id="vo"}
+                                    <option value="{$vo.id}" {if condition="$vo['id'] eq $art['cateid']"}selected = "selected"{/if}><?php echo str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;',$vo['level']);if($vo['level']!==0)echo "|-";?>{$vo.catename}</option> 
+                                    {/volist}                                
+                                </select>
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>     
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label no-padding-right">文章标题</label>
+                            <div class="col-sm-6">
+                                <input type="hidden" value="{$art.id}" name="id">
+                                <input class="form-control" id="title" placeholder="" name="title" type="text" required="" value="{$art.title}">
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label no-padding-right">关键字</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="keywords" placeholder="" name="keywords" type="text"  value="{$art.keywords}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label no-padding-right">作者</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="author" placeholder="" name="author" type="text"  value="{$art.author}">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="desc" class="col-sm-2 control-label no-padding-right">文章描述</label>
+                            <div class="col-sm-6">
+                                <textarea class="form-control" rows="3" name="desc">{$art.desc}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="desc" class="col-sm-2 control-label no-padding-right">缩略图</label>
+                            <div class="col-sm-8">
+                                <input type="file" name="photo" id="imageUpload" value="" onchange="uploads()">
+                                <img id="img" src="__PUBLIC__/{$art.thumb}" style="max-width: 300px;max-height: 150px;padding-top: 20px;">
+                                <input type="hidden" name="thumb" value="{$art.thumb}" id="thumb">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label no-padding-right">推荐</label>
+                            <div class="col-sm-6">
+                                <label class="checkbox-inline">
+                                  <input type="radio" name="rec" id="rec" 
+                                     value="1" {if condition="$art['rec'] eq 1"}checked{/if}> 推荐
+                               </label>
+                               <label class="checkbox-inline">
+                                  <input type="radio" name="rec" id="rec" 
+                                     value="0" {if condition="$art['rec'] eq 0"}checked{/if}> 不推荐
+                               </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label no-padding-right">状态</label>
+                            <div class="col-sm-6">
+                                <label class="checkbox-inline">
+                                  <input type="radio" name="status" id="status" 
+                                     value="1" {if condition="$art['status'] eq 1"}checked{/if}> 发布
+                               </label>
+                               <label class="checkbox-inline">
+                                  <input type="radio" name="status" id="status" 
+                                     value="0" {if condition="$art['status'] eq 0"}checked{/if}> 不发布
+                               </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="desc" class="col-sm-2 control-label no-padding-right">正文</label>
+                            <div class="col-sm-8">
+                                <textarea  name="content" id="content">{$art.content}</textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="button" class="btn btn-default" id="edit_button_submit">更新</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+                </div>
+                <!-- /Page Body -->
+            </div>
+            <!-- /Page Content -->
+		</div>	
+	</div>
+<script type="text/javascript">
+        UE.getEditor('content',{initialFrameWidth:600,initialFrameHeight:200,});
+        var url={
+            success_url:"{:url('lst')}",
+            upload_url:'../../upload',
+        };
+    </script>
+	    <!--Basic Scripts-->
+    {include file="public/js" /}
+    
+
+
+</body></html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"><!--Head--><head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="login page">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!--Basic Styles-->
+    <link href="__ADMIN__/style/bootstrap.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="__ADMIN__/validator/dist/css/bootstrapValidator.css" />
+    <link href="__ADMIN__/style/font-awesome.css" rel="stylesheet">
+    <!--Beyond styles-->
+    <link id="beyond-link" href="__ADMIN__/style/beyond.css" rel="stylesheet">
+    <link href="__ADMIN__/style/demo.css" rel="stylesheet">
+    <link href="__ADMIN__/style/animate.css" rel="stylesheet">
+</head>
+<!--Head Ends-->
+<!--Body-->
+
+<body>
+    <div class="login-container animated fadeInDown">
+        <!-- <form action="" method="post" class="form-signin required-validate"> -->
+            <div class="loginbox bg-white">
+                <div class="loginbox-title">SIGN IN</div>
+                <div class="form-group">
+                <div class="loginbox-textbox">
+                    <input class="form-control" type="text" autofocus name="name" id="name" placeholder="请输入用户名" autocomplete="off" data-bv-notempty />
+                </div>
+                <div class="loginbox-textbox">
+                    <input class="form-control" placeholder="password" name="password" type="password" id = "password">
+                </div>
+                <div class="loginbox-submit">
+                     <button class="btn btn-primary btn-block" id="login_button">Login</button> 
+                </div>
+                </div>
+            </div>
+                <div class="logobox">
+                    <p class="text-center">骑行网后台管理系统</p>
+                </div>
+        <!-- </form> -->
+    </div>
+    <!--Basic Scripts-->
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="__ADMIN__/style/jquery_002.js"></script>
+    <!--Beyond Scripts-->
+    <script src="__ADMIN__/style/login.js"></script>
+    <script type="text/javascript">
+        var url={
+            success_url:"{:url('index/index')}",
+        };
+    </script>
+
+</body><!--Body Ends--></html>
